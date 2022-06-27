@@ -1,0 +1,46 @@
+plugins {
+    id 'java-library'
+    id "io.qameta.allure" version "2.9.6"
+}
+
+repositories {
+    mavenCentral()
+}
+
+allure {
+    report {
+        version.set("2.18.1")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            junit5 {
+                adapterVersion.set("2.18.1")
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation("commons-io:commons-io:2.6")
+    implementation("io.qameta.allure:allure-java-commons:2.14.0")
+    implementation("org.junit.jupiter:junit-jupiter-api:5.7.2")
+    implementation("org.junit.jupiter:junit-jupiter-engine:5.7.2")
+    implementation("org.junit.jupiter:junit-jupiter-params:5.7.2")
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+tasks.withType(Test) {
+    systemProperties(System.getProperties())
+    useJUnitPlatform()
+
+    testLogging {
+        lifecycle {
+            events "started", "skipped", "failed", "standard_error", "standard_out"
+            exceptionFormat "short"
+        }
+    }
+}

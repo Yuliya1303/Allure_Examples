@@ -17,7 +17,7 @@ public class AllureExamplesRepositoryTests {
     @DisplayName("1 watcher exists in Allure examples repository")
     @Owner("allure8")
     void watcherShouldExist() {
-        step("Open https://github.com/Yuliya1303/Allure_Examples");
+        step("Open 'https://github.com/Yuliya1303/Allure_Examples'");
         step("Verify that 1 watcher exists");
     }
 }
